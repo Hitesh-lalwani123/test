@@ -53,7 +53,7 @@ options.add_argument('--disable-application-cache')
 options.add_argument('--disable-gpu')
 options.add_argument("--disable-dev-shm-usage")
 
-# options.add_argument('--headless=new')  # Better headless mode
+options.add_argument('--headless=new')  # Better headless mode
 # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 
 SCRAPER_URL = "https://www.confirmtkt.com/rbooking/trains/from/" \
@@ -71,10 +71,11 @@ def scraper(date_list = ['29-06-2025']):
             return []
         try:
             driver.get(SCRAPER_URL.format(from_station=from_station, to_station=to_station,date=date))
-            wait = WebDriverWait(driver, 15)
-            wait.until(
-                EC.presence_of_element_located((By.XPATH, "//*[contains(@id, 'train-')]"))
-            )
+            # wait = WebDriverWait(driver, 15)
+            # wait.until(
+            #     EC.presence_of_element_located((By.XPATH, "//*[contains(@id, 'train-')]"))
+            # )
+            time.sleep(8)
             elements = driver.find_elements(By.XPATH, "//*[contains(@id, 'train-')]")
             result = []
             for val in elements:
@@ -129,8 +130,8 @@ def scraper(date_list = ['29-06-2025']):
     p2 = 0
     total_calls = (len_stations*(len_stations+1))/2 * len(date_list)
     print("total time: ", (total_calls*8)/60)
-    driver.get(SCRAPER_URL.format(from_station="NGP", to_station="BPL",date="26-06-2025"))
-    time.sleep(2)
+    # driver.get(SCRAPER_URL.format(from_station="NGP", to_station="BPL",date="26-06-2025"))
+    # time.sleep(2)
     for curr_date in date_list:
         train_data = {}
         for p1 in range(len(stations)):
@@ -139,7 +140,7 @@ def scraper(date_list = ['29-06-2025']):
                     continue
                 try:
                     trains = get_train_info(stations[p1],stations[p2],date=curr_date)
-                    # time.sleep(2)
+                    time.sleep(2)
                    
                     result_list = generate_data(trains)
                     percent = (((records_processed + 1) / total_calls) * 100)

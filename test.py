@@ -6,8 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
-s= Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=s)
+driver = webdriver.Chrome()
 driver.maximize_window()
 page = driver.get("https://google.com")
 print(page)

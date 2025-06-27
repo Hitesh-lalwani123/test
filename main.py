@@ -6,6 +6,6 @@ from test import scraper
 def health_check():
     print("scraper running")
     res = scraper()
-    
-    return {"msg":res}
+    print(res)
+    return {"msg":"scraper ran"}
     

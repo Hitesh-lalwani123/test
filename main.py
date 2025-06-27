@@ -8,9 +8,8 @@ def health_check():
     return {"msg":"api running"}
 
 @app.get("/scraper_data")
-def health_check():
+def get_train_data(background_tasks: BackgroundTasks):
     print("scraper running")
-    res = scraper()
-    print(res)
-    return res
+    background_tasks.add_task(scraper)
+    return {"msg":"Scraper running in background"}
     

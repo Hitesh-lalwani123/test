@@ -14,13 +14,15 @@ options.add_argument('--disable-extensions')
 options.add_argument('--disable-gpu')
 # options.add_argument('--user-agent={}'.format(random.choice(list(self.user_agents))))
 
-driver = webdriver.Chrome(options=options)
-driver.set_page_load_timeout(90)
-url = "https://google.com"
-# Load the URL and get the page source
-driver.implicitly_wait(6)
-driver.get(url)
-# driver = webdriver.Chrome()
-# driver.maximize_window()
-# page = driver.get()
-# print(page)
+def scraper():
+    driver = webdriver.Chrome(options=options)
+    driver.set_page_load_timeout(90)
+    url = "https://google.com"
+    # Load the URL and get the page source
+    driver.implicitly_wait(6)
+    driver.get(url)
+    return "scrper ran"
+    # driver = webdriver.Chrome()
+    # driver.maximize_window()
+    # page = driver.get()
+    # print(page)

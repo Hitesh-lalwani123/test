@@ -16,7 +16,7 @@ stations = [
     # "KRNT",   
     # "YG",     
     "MBNR",   
-    # "SEM",    
+    "SEM",    
     # "SC",     
     # "KZJ",    
     # "RDM",    
@@ -25,8 +25,8 @@ stations = [
     # "NGP",    
     # "ET",     
     "BPL",    
-    # "VGLJ",   
-    # "GWL",    
+    "VGLJ",   
+    "GWL",    
     # "AGC",    
     # "HZM"  
 ]
@@ -71,11 +71,11 @@ def scraper(date_list = ['29-06-2025']):
             return []
         try:
             driver.get(SCRAPER_URL.format(from_station=from_station, to_station=to_station,date=date))
-            # wait = WebDriverWait(driver, 15)
-            # wait.until(
-            #     EC.presence_of_element_located((By.XPATH, "//*[contains(@id, 'train-')]"))
-            # )
-            time.sleep(8)
+            wait = WebDriverWait(driver, 15)
+            wait.until(
+                EC.presence_of_element_located((By.XPATH, "//*[contains(@id, 'train-')]"))
+            )
+            time.sleep(1)
             elements = driver.find_elements(By.XPATH, "//*[contains(@id, 'train-')]")
             result = []
             for val in elements:
@@ -131,7 +131,7 @@ def scraper(date_list = ['29-06-2025']):
     total_calls = (len_stations*(len_stations+1))/2 * len(date_list)
     print("total time: ", (total_calls*8)/60)
     # driver.get(SCRAPER_URL.format(from_station="NGP", to_station="BPL",date="26-06-2025"))
-    # time.sleep(2)
+    # time.sleep(1)
     for curr_date in date_list:
         train_data = {}
         for p1 in range(len(stations)):
@@ -140,7 +140,7 @@ def scraper(date_list = ['29-06-2025']):
                     continue
                 try:
                     trains = get_train_info(stations[p1],stations[p2],date=curr_date)
-                    time.sleep(2)
+                    # time.sleep(2)
                    
                     result_list = generate_data(trains)
                     percent = (((records_processed + 1) / total_calls) * 100)

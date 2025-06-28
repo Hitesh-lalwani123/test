@@ -10,8 +10,7 @@ def health_check():
 @app.get("/scraper_data")
 def get_train_data(background_tasks: BackgroundTasks):
     print("scraper running")
-    background_tasks.add_task(scraper)
-    # res = scraper()
-    return {"msg":"Scraper running in background"}
-    # return {"msg":"Scraper running in background"}
+    # background_tasks.add_task(scraper)
+    res = scraper()
+    return res
     
